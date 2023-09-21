@@ -2,9 +2,9 @@ import styles from './Header.module.scss';
 
 const Header = (props) => {
     return (
-        <div>
+        <div className={styles.padd}>
             <h1 className={styles.title}>
-                Handphone
+                Spesifikasi Handphone
             </h1>
         </div>
     )
