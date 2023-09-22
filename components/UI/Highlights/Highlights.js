@@ -1,3 +1,4 @@
+'use client'
 import styles from './Highlights.module.scss';
 import { Container, Grid, Card, CardContent, Typography, CardActions, Button, Stack } from '@mui/material';
 import Image from 'next/image';
@@ -12,7 +13,8 @@ async function fetcher(url) {
 
 
 
-const Highlights = async (props) => {
+// eslint-disable-next-line @next/next/no-async-client-component
+const Highlights = async () => {
     const options = {
         method: 'GET',
         url: 'https://mobile-phones2.p.rapidapi.com/48/phones',
