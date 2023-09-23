@@ -2,34 +2,27 @@
 import styles from './Highlights.module.scss';
 import { Container, Grid, Card, CardContent, Typography, CardActions, Button, Stack } from '@mui/material';
 import Image from 'next/image';
-// import useSWR from 'swr';
+import useSWR from 'swr';
 import axios from 'axios';
 
-async function fetcher(url) {
-    const res = await fetch(url);
-    const json = await res.json();
-    return json;
-}
-
+const fetcher = (url, token) =>
+    axios
+        .get(url, {
+            headers: {
+                'X-RapidAPI-Key': 'b66eb3153bmsh1d00af693516ac2p106275jsn0b6d5b9e5b20',
+                'X-RapidAPI-Host': 'mobile-phone-specs-database.p.rapidapi.com'
+            }
+        })
+        .then((res) => res.data);
 
 
 // eslint-disable-next-line @next/next/no-async-client-component
-const Highlights = async () => {
-    const options = {
-        method: 'GET',
-        url: 'https://mobile-phones2.p.rapidapi.com/48/phones',
-        headers: {
-            'X-RapidAPI-Key': 'b66eb3153bmsh1d00af693516ac2p106275jsn0b6d5b9e5b20',
-            'X-RapidAPI-Host': 'mobile-phones2.p.rapidapi.com'
-        }
-    };
+const Highlights = () => {
 
-    try {
-        const response = await axios.request(options);
-        console.log(response.data);
-    } catch (error) {
-        console.error(error);
-    }
+    const { data, error } = useSWR(
+        [`https://mobile-phone-specs-database.p.rapidapi.com/gsm/get-models-by-brandname/Samsung`], fetcher
+    );
+    console.log(data);
 
     return (
         <>
